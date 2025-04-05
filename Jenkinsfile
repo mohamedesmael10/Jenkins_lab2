@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/mohamedesmael10/Jenkins_lab2.git', branch: 'main'
+                git url: 'https://github.com/mohamedesmael10/Jenkins_lab2.git', branch: 'master'
             }
         }
         stage('Docker Login') {
@@ -25,12 +25,12 @@ pipeline {
         }
         stage('Tag Image') {
             steps {
-                sh 'docker tag ubuntu mohamedesmael/jenkins_lab1:v2'
+                sh 'docker tag ubuntu mohamedesmael/jenkins_lab1:v5'
             }
         }
         stage('Push Image') {
             steps {
-                sh 'docker push mohamedesmael/jenkins_lab1:v2'
+                sh 'docker push mohamedesmael/jenkins_lab1:v5'
             }
         }
     }
