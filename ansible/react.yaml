@@ -71,7 +71,7 @@
       changed_when: container_check.stdout != ""  # Mark change only if container is removed
 
     - name: Run the latest version of the Docker image
-      ansible.builtin.command: docker run -d --name devops_final_project -p 3000:80 mohamedesmael/jenkins_lab1:latest
+      ansible.builtin.command: docker run -d --name jenkins_lab1 -p 3000:80 mohamedesmael/jenkins_lab1:latest
       when: container_check.stdout == ""  # Only run if the container is not already running
       changed_when: true  # This task changes the state by running the container      
       
