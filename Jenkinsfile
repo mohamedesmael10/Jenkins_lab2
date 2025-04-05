@@ -1,5 +1,11 @@
 pipeline {
+    agent any
     stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/mohamedesmael10/Jenkins_lab2.git'
+            }
+        }
         stage('Docker Login') {
             steps {
 
