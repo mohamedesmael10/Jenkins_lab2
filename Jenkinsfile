@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Docker Login') {
             steps {
-
+                echo "webhook test"
                 sh '''
                   echo "\$DOCKER_CREDS_PSW" | docker login -u "\$DOCKER_CREDS_USR" --password-stdin
                 '''
