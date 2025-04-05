@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-                sh 'docker push mohamedesmael/jenkins_lab1:v2'
+                sh 'docker push mohamedesmael/jenkins_lab1:v3'
             }
         }
     }
