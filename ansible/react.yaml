@@ -53,25 +53,25 @@
         state: restarted        
         
     - name: Pull the latest version of the Docker image
-      ansible.builtin.command: docker pull mohamedesmael/devops_final_project:latest
+      ansible.builtin.command: docker pull mohamedesmael/jenkins_lab1:latest
       changed_when: false  # This task doesn't modify the state if the image is already up to date
 
     - name: Check if the container is already running
-      ansible.builtin.command: docker ps -q -f name=devops_final_project
+      ansible.builtin.command: docker ps -q -f name=jenkins_lab1
       register: container_check
       changed_when: false  # Only checking, so no change reported
     - name: Stop the existing Docker container if it is running
-      ansible.builtin.command: docker stop devops_final_project
+      ansible.builtin.command: docker stop jenkins_lab1
       when: container_check.stdout != ""
       changed_when: container_check.stdout != ""  # Mark change only if container is stopped
 
     - name: Remove the existing Docker container if it exists
-      ansible.builtin.command: docker rm devops_final_project
+      ansible.builtin.command: docker rm jenkins_lab1
       when: container_check.stdout != ""
       changed_when: container_check.stdout != ""  # Mark change only if container is removed
 
     - name: Run the latest version of the Docker image
-      ansible.builtin.command: docker run -d --name devops_final_project -p 3000:80 mohamedesmael/devops_final_project:latest
+      ansible.builtin.command: docker run -d --name devops_final_project -p 3000:80 mohamedesmael/jenkins_lab1:latest
       when: container_check.stdout == ""  # Only run if the container is not already running
       changed_when: true  # This task changes the state by running the container      
       
