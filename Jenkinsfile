@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_CREDS = credentials('mohamedesmael_dockerhub')
+    }
+    
     stages {
         stage('Checkout') {
             steps {
@@ -10,7 +14,7 @@ pipeline {
             steps {
 
                 sh '''
-                  echo "$PASS" | docker login -u "$USER" --password-stdin
+                  echo "\$DOCKER_CREDS_PSW" | docker login -u "\$DOCKER_CREDS_USR" --password-stdin
                 '''
             }
         }
