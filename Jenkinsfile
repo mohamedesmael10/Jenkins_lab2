@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Tag Image') {
             steps {
-                sh 'docker tag ubuntu mohamedesmael/jenkins_lab1:v2'
+                sh 'docker tag ubuntu mohamedesmael/jenkins_lab1:v3'
             }
         }
         stage('Push Image') {
