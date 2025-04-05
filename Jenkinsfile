@@ -9,7 +9,33 @@ pipeline {
         ANSIBLE_DIR = 'ansible'
     }
     stages {
-       
+
+    
+         stage('Docker Build') {
+             steps {
+                 // Build the Docker image
+                 sh "docker build Docker/. -t ${DOCKER_IMAGE}"
+             }
+         }
+         stage('Docker Tag as Latest') {
+             steps {
+                 // Tag the image as latest
+                 sh "docker tag ${DOCKER_IMAGE} ${LATEST_IMAGE}"
+             }
+         }
+         stage('Docker Push') {
+             steps {
+                 // Push the images to Docker Hub
+                 withCredentials([usernamePassword(credentialsId: REGISTRY_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                     sh '''
+                         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                         docker push ${DOCKER_IMAGE}
+                         docker push ${LATEST_IMAGE}
+                     '''
+                 }
+             }
+         }
+        
         stage('Run Terraform') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: AWS_CREDENTIALS, accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
