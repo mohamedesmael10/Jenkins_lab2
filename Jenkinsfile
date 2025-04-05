@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/mohamedesmael10/Jenkins_lab2.git'
+                git url: 'https://github.com/mohamedesmael10/Jenkins_lab2.git', branch: 'main'
             }
         }
         stage('Docker Login') {
